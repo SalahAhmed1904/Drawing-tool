@@ -58,3 +58,5 @@ function draw() {
 		alert("it doesn't look like your tool has a draw method!");
 	}
 }
+ghhg
+
