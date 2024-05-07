@@ -46,25 +46,33 @@ function Toolbox() {
 		}
 	};
 
-	this.selectTool = function(toolName) {
-		//search through the tools for one that's name matches
-		//toolName
-		for (var i = 0; i < this.tools.length; i++) {
-			if (this.tools[i].name == toolName) {
-				//if the tool has an unselectTool method run it.
-				if (this.selectedTool != null && this.selectedTool.hasOwnProperty(
-						"unselectTool")) {
-					this.selectedTool.unselectTool();
-				}
-				//select the tool and highlight it on the toolbar
-				this.selectedTool = this.tools[i];
-				select("#" + toolName + "sideBarItem").style("border", "2px solid blue");
 
-				//if the tool has an options area. Populate it now.
-				if (this.selectedTool.hasOwnProperty("populateOptions")) {
-					this.selectedTool.populateOptions();
-				}
-			}
+	this.selectTool = function(toolName) {
+		// Unselect the previous tool, if there is one
+		if (this.selectedTool != null && this.selectedTool.hasOwnProperty("unselectTool")) {
+			this.selectedTool.unselectTool();
+		}
+	
+		// Find and select the new tool
+		this.selectedTool = this.tools.find(tool => tool.name === toolName);
+		if (!this.selectedTool) {
+			console.error("Tool not found: " + toolName);
+			return;
+		}
+	
+		// Highlight the selected tool in the UI
+		var items = selectAll(".sideBarItem");
+		items.forEach(item => item.style('border', '0')); // Remove borders from all tools
+		select("#" + toolName + "sideBarItem").style("border", "2px solid blue");
+	
+		// Initialize the selected tool, if it has an init method
+		if (this.selectedTool.hasOwnProperty("init")) {
+			this.selectedTool.init();
+		}
+	
+		// Populate tool options, if available
+		if (this.selectedTool.hasOwnProperty("populateOptions")) {
+			this.selectedTool.populateOptions();
 		}
 	};
 

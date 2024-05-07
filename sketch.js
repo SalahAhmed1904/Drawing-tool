@@ -5,28 +5,47 @@ var colourP = null;
 var helpers = null;
 
 
+// function setup() {
+
+// 	//create a canvas to fill the content div from index.html
+// 	canvasContainer = select('#content');
+// 	var c = createCanvas(canvasContainer.size().width, canvasContainer.size().height);
+// 	c.parent("content");
+
+// 	//create helper functions and the colour palette
+//     helpers = new HelperFunctions();
+// 	colourP = new ColourPalette();
+
+// 	//create a toolbox for storing the tools
+// 	toolbox = new Toolbox();
+
+// 	//add the tools to the toolbox.
+// 	toolbox.addTool(new FreehandTool());
+// 	toolbox.addTool(new LineToTool());
+// 	toolbox.addTool(new sprayCanTool());
+// 	toolbox.addTool(new mirrorDrawTool());
+// 	background(255);
+
+// }
+
 function setup() {
+    canvasContainer = select('#content');
+    var c = createCanvas(canvasContainer.size().width, canvasContainer.size().height);
+    c.parent("content");
 
-	//create a canvas to fill the content div from index.html
-	canvasContainer = select('#content');
-	var c = createCanvas(canvasContainer.size().width, canvasContainer.size().height);
-	c.parent("content");
-
-	//create helper functions and the colour palette
     helpers = new HelperFunctions();
-	colourP = new ColourPalette();
+    colourP = new ColourPalette();
+    toolbox = new Toolbox();
 
-	//create a toolbox for storing the tools
-	toolbox = new Toolbox();
+    // Initialize tools
+    toolbox.addTool(new FreehandTool());
+    toolbox.addTool(new LineToTool());
+    toolbox.addTool(new sprayCanTool());
+    toolbox.addTool(new mirrorDrawTool());
 
-	//add the tools to the toolbox.
-	toolbox.addTool(new FreehandTool());
-	toolbox.addTool(new LineToTool());
-	toolbox.addTool(new sprayCanTool());
-	toolbox.addTool(new mirrorDrawTool());
-	background(255);
-
+    background(255);
 }
+
 
 function draw() {
 	//call the draw function from the selected tool.

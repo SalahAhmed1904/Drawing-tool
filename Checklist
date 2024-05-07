@@ -1,1 +1,55 @@
-This is a test checklist
+Basic Enhancements:
+    Multiple Brush Sizes:
+        Enable users to change the size of the brush tools for finer control over their drawings.
+
+    Eraser:
+        Add an eraser tool to help clean specific part of drawing without undo/clearing whiteboard
+        Able to adjust size and shape of eraser (square, circle)
+
+    Customizable Color Palette:
+        Expand the color picker to allow users to create and save custom colors.
+
+    Keyboard Shortcuts:
+        Implement shortcuts for quick access to tools, saving, undoing, etc.
+
+    Straight Line Tool Enhancements:
+    Provide options for drawing lines at fixed angles or with adjustable width.
+
+    Diagonal reflection:
+    Add functionality to make mirrorDrawTool have diagonal reflection as well
+
+Intermediate Enhancements
+    Layer Management:
+        Introduce layers that users can add, remove, and reorder. Allow toggling visibility of each layer.
+
+    Undo/Redo Stack:
+        Create a more robust undo/redo feature by maintaining a stack of actions or canvas states.
+
+    Grid Overlay:
+        Add an optional grid overlay on the canvas which can help in aligning elements more precisely.
+
+    Text Tool:
+        Include a tool for adding text onto the canvas, with options for font style, size, and color.
+    
+    Shape Tool:
+        Include various shapes to be able to be drawn directly and resized according to cursor movement
+
+    Zoom and Pan:
+        Allow users to zoom in and out of the canvas and pan around to focus on different parts of their artwork.
+
+    Select tool:
+        Allow users to create a "selection square" which encapsulates all form of drawing in selected square and be able to do various tasks with it such as rotation and erasing
+    
+
+Advanced Enhancements
+    Custom Brushes:
+        Develop custom brush effects (such as scatter, texture, pattern) that users can use for more creative expressions.
+
+    Masking Tools:
+        Implement masking tools that allow users to define areas that will not be affected by drawing operations.
+
+    Image Import and Editing:
+        Enable users to import images onto the canvas, which can then be edited or integrated into their artwork.
+
+    Live Collaboration:
+        Add a feature for multiple users to work on the same canvas in real-time, similar to collaborative whiteboards.

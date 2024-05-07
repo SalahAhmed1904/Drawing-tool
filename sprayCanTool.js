@@ -1,20 +1,19 @@
 
-function sprayCanTool(name, icon, points, spread) 
-{
+
+function sprayCanTool() {
     this.name = "sprayCanTool";
     this.icon = "assets/sprayCan.jpg";
     this.points = 13;
     this.spread = 10;
-    this.draw = function(){
-        //if the mouse is pressed paint on the canvas
-        //spread describes how far to spread the paint from the mouse pointer
-        //points holds how many pixels of paint for each mouse press.
-        if(mouseIsPressed){
-            for(var i = 0; i < this.points; i++){
-                point(random(mouseX-this.spread, mouseX + this.spread), 
-                    random(mouseY-this.spread, mouseY+this.spread));
+    this.pointSize = 1;  // Default size of each point
+
+    this.draw = function() {
+        if (mouseIsPressed) {
+            for (var i = 0; i < this.points; i++) {
+                var x = random(mouseX - this.spread, mouseX + this.spread);
+                var y = random(mouseY - this.spread, mouseY + this.spread);
+                ellipse(x, y, this.pointSize, this.pointSize);  // Use ellipse for variable size
             }
         }
     };
-    
 }
