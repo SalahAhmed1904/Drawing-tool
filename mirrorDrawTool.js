@@ -20,7 +20,7 @@ function mirrorDrawTool() {
 	//mouse coordinates for the other side of the Line of symmetry
 	var previousOppositeMouseX = -1;
 	var previousOppositeMouseY = -1;
-
+	
 	this.draw = function() {
 		//display the last save state of pixels
 		updatePixels();
@@ -109,31 +109,35 @@ function mirrorDrawTool() {
 	};
 
 
-	//when the tool is deselected update the pixels to just show the drawing and
-	//hide the line of symmetry. Also clear options
-	this.unselectTool = function() {
-		updatePixels();
-		//clear options
-		select(".options").html("");
-	};
-
-	//adds a button and click handler to the options area. When clicked
-	//toggle the line of symmetry between horizonatl to vertical
 	this.populateOptions = function() {
-		select(".options").html(
-			"<button id='directionButton'>Make Horizontal</button>");
-		//click handler
-		select("#directionButton").mouseClicked(function() {
-			var button = select("#" + this.elt.id);
+		let optionsHtml = select(".options").html(); // Get existing HTML in .options
+		optionsHtml += "<button id='directionButton' style='display:none;'>Make Horizontal</button>"; // Add the button but keep it hidden initially
+		select(".options").html(optionsHtml); // Update the HTML in the options container
+	
+		let directionButton = select("#directionButton");
+		let strokeWeightInput = select("#strokeWeightInput");
+	
+		directionButton.mouseClicked(function() {
 			if (self.axis == "x") {
 				self.axis = "y";
 				self.lineOfSymmetry = height / 2;
-				button.html('Make Vertical');
+				directionButton.html('Make Vertical');
 			} else {
 				self.axis = "x";
 				self.lineOfSymmetry = width / 2;
-				button.html('Make Horizontal');
+				directionButton.html('Make Horizontal');
 			}
 		});
+	
+		// Show the button when the tool is selected
+		directionButton.style('display', 'inline-block');
+	};
+	
+	this.unselectTool = function() {
+		updatePixels();
+		// Hide the elements when the tool is deselected
+		select("#directionButton").style('display', 'none');
+	
 	};
 }
+
