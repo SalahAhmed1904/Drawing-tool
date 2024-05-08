@@ -1,4 +1,42 @@
-function LineToTool() {
+// function lineToTool(){
+// 	this.icon = "assets/lineTo.jpg";
+// 	this.name = "LineTo";
+
+// 	//initialises global variables for the start of the line and whether the mouse is pressed
+
+// 	var startMouseX = -1;
+// 	var startMouseY = -1;
+// 	var drawing = false;
+
+// 	//when the mouse is pressed, the start of the line is set to the mouse position and the pixels are loaded
+// 	this.draw = function(){
+
+// 		if(mouseIsPressed){
+// 			if(startMouseX == -1){
+// 				startMouseX = mouseX;
+// 				startMouseY = mouseY;
+// 				drawing = true;
+// 				loadPixels();
+// 			}
+// //if the mouse is pressed and the start of the line has been set, the pixels are updated and a line is drawn from the start of the line to the mouse position
+// 			else{
+// 				updatePixels();
+// 				line(startMouseX, startMouseY, mouseX, mouseY);
+// 			}
+
+// 		}
+// //if the mouse is not pressed and the start of the line has been set, the pixels are updated and a line is drawn from the start of the line to the mouse position
+// 		else if(drawing){
+// 			drawing = false;
+// 			startMouseX = -1;
+// 			startMouseY = -1;
+// 		}
+// 	};
+
+
+// }
+
+function lineToTool(){
     this.icon = "assets/lineTo.jpg";
     this.name = "LineTo";
 
@@ -6,40 +44,31 @@ function LineToTool() {
     var startMouseY = -1;
     var drawing = false;
     var strokeWeightInput; // Input for adjusting the stroke weight
-    var applyButton; // Button to apply stroke weight
 
-    this.init = function() {
-        // Select the input and button elements
-        strokeWeightInput = select('#strokeInput');
-        applyButton = select('#applyStroke');
+    this.populateOptions = function() {
+        let optionsArea = select('.options');
+        optionsArea.html('<label for="lineStrokeWeight">Line Width:</label><input type="range" id="lineStrokeWeight" min="1" max="10" value="1">');
 
-        // Add event listener to the button
-        applyButton.mousePressed(() => {
+        strokeWeightInput = select('#lineStrokeWeight');
+        strokeWeightInput.input(() => {
             const weight = parseFloat(strokeWeightInput.value());
-            if (weight >= 0.1 && weight <= 10) {
-                strokeWeight(weight);
-            } else {
-                alert("Please enter a value between 0.1 and 10");
-            }
+            strokeWeight(weight);
         });
     };
 
-    this.draw = function() {
-        // Get the current stroke weight from input
-        var currentStrokeWeight = parseFloat(strokeWeightInput.value());
-        strokeWeight(currentStrokeWeight); // Set stroke weight dynamically
-
-        if (mouseIsPressed) {
-            if (startMouseX == -1) {
+    this.draw = function(){
+        if(mouseIsPressed){
+            if(startMouseX === -1){
                 startMouseX = mouseX;
                 startMouseY = mouseY;
                 drawing = true;
-                loadPixels();
+                loadPixels(); // Ensures we capture the state at the start of drawing
             } else {
-                updatePixels();
+                updatePixels(); // Restore the initial state before redrawing the line
                 line(startMouseX, startMouseY, mouseX, mouseY);
             }
-        } else if (drawing) {
+        } else if(drawing){
+            line(startMouseX, startMouseY, mouseX, mouseY); // Ensure line is drawn on mouse release
             drawing = false;
             startMouseX = -1;
             startMouseY = -1;
@@ -47,9 +76,7 @@ function LineToTool() {
     };
 
     this.unselectTool = function() {
-        if (strokeWeightInput) {
-            strokeWeightInput.value(1); // Reset input field to default value
-        }
-        strokeWeight(1); // Reset the actual stroke weight used by the canvas
+        // Clear any settings or temporary states when this tool is no longer active
+        select('.options').html(''); // Clears the options area
     };
 }
