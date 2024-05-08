@@ -5,6 +5,7 @@ var colourP = null;
 var helpers = null;
 
 
+
 function setup() {
     canvasContainer = select('#content');
     var c = createCanvas(canvasContainer.size().width, canvasContainer.size().height);
@@ -12,7 +13,7 @@ function setup() {
 
     helpers = new HelperFunctions();
     colourP = new ColourPalette();
-    toolbox = new Toolbox();
+    toolbox = new Toolbox(colourP);  // Pass the ColourPalette instance
 
     // Initialize tools
     toolbox.addTool(new freehandTool());
