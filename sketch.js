@@ -25,7 +25,6 @@ function setup() {
     background(255);
 }
 
-
 function draw() {
 	//call the draw function from the selected tool.
 	//hasOwnProperty is a javascript function that tests
@@ -37,3 +36,4 @@ function draw() {
 		alert("it doesn't look like your tool has a draw method!");
 	}
 }
+

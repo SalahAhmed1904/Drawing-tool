@@ -42,3 +42,4 @@ function lineToTool(){
         select('.options').html(''); // Clears the options area
     };
 }
+
