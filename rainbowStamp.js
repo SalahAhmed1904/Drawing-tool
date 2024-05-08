@@ -21,7 +21,7 @@ function rainbowStamp() {
         if (mouseIsPressed) {
             let color = random(this.colors); // Select a random color
             let shape = random(this.shapes); // Select a random shape
-            let size = random(10, 25); // Random size for more variety
+            let size = random(15, 25); // Random size for more variety
     
             switch (shape) {
                 case 'circle':
@@ -49,8 +49,8 @@ function rainbowStamp() {
                     this.drawPentagon(mouseX, mouseY, size);
                     break;
                 case 'ellipse':
-                    let randomWidth = random(20, 50);
-                    let randomHeight = random(20, 50);
+                    let randomWidth = random(5, 15);
+                    let randomHeight = random(5, 15);
                     this.drawGradient(mouseX, mouseY, Math.max(randomWidth, randomHeight), color, 'white');
                     break;
                 case 'hexagon':
