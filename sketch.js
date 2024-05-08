@@ -22,7 +22,7 @@ function setup() {
     toolbox.addTool(new mirrorDrawTool());
     toolbox.addTool(new eraserTool());
     toolbox.addTool(new rainbowStamp());
-
+    toolbox.addTool(new shapeTool());
     background(255);
 }
 
