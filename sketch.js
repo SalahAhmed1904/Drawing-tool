@@ -21,6 +21,7 @@ function setup() {
     toolbox.addTool(new sprayCanTool());
     toolbox.addTool(new mirrorDrawTool());
     toolbox.addTool(new eraserTool());
+    toolbox.addTool(new rainbowStamp());
 
     background(255);
 }
