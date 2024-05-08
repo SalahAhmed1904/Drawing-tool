@@ -31,6 +31,7 @@ function Toolbox() {
 
 	};
 
+	
 	//add a tool to the tools array
 	this.addTool = function(tool) {
 		//check that the object tool has an icon and a name
@@ -46,13 +47,22 @@ function Toolbox() {
 		}
 	};
 
+	this.resetDrawingState = function() {
+		stroke(0); // Default to black
+		strokeWeight(1); // Default stroke weight
+		// Add other default settings
+	};
 
 	this.selectTool = function(toolName) {
+		// Reset drawing state before switching tools
+		this.resetDrawingState();
+	
 		// Unselect the previous tool, if there is one
 		if (this.selectedTool != null && this.selectedTool.hasOwnProperty("unselectTool")) {
 			this.selectedTool.unselectTool();
 		}
 	
+		// Rest of the selectTool method...
 		// Find and select the new tool
 		this.selectedTool = this.tools.find(tool => tool.name === toolName);
 		if (!this.selectedTool) {
@@ -76,5 +86,5 @@ function Toolbox() {
 		}
 	};
 
-
 }
+
