@@ -1,0 +1,14 @@
+Log 1
+
+Log 1.1
+Added brush size button option for freehand drawing.
+Added slider option for brush size for lineToTool tool
+Added brush size button option for sprayCanShape
+Cleaned up toolBox
+
+Log 1.2
+Added Eraser tool
+Added adjustable eraser size
+Added proper ui Management for each tool so that it removes ui features properly upon another tools selection.
+Added drop down box to select multiple shapes that eraser can make
+Slightly changed style.css to make ui look more consistent and presentable. 
