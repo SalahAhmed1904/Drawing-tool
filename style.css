@@ -87,3 +87,25 @@
     color: #fff;
     font-size: 150%;
 }
+
+.colourPalette {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start; /* Align items at the start of the flex line */
+}
+
+.colourSwatches {
+    width: 35px;  /* Decrease width to make each swatch smaller */
+    height: 35px; /* Decrease height to make each swatch smaller */
+    margin: 2px;  /* Adjust spacing between swatches if needed */
+    display: inline-block; /* Maintains inline layout */
+    cursor: pointer; /* Shows a pointer on hover to indicate clickability */
+    border: 1px solid #ccc; /* Optional: adds a border around each swatch */
+}
+
+.customColorButtonContainer {
+    display: flex;
+    flex: 1 0 auto; /* Take remaining space, adjust based on actual needs */
+    justify-content: flex-end; /* Align button to the right */
+    padding-right: 10px; /* Padding on the right for spacing */
+}
