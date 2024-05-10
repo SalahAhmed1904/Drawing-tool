@@ -23,6 +23,7 @@ function setup() {
     toolbox.addTool(new eraserTool());
     toolbox.addTool(new rainbowStamp());
     toolbox.addTool(new shapeTool());
+    toolbox.addTool(new spiralTool());
     background(255);
 }
 
