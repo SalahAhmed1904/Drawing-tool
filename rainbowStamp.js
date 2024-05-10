@@ -1,28 +1,31 @@
-
 function rainbowStamp() {
-    this.icon = 'assets/rainbow.jpg'; // Placeholder, replace with actual path
+    // Tool properties
+    this.icon = 'assets/rainbow.jpg'; // Placeholder; replace with actual path
     this.name = 'rainbowStamp';
     this.shapes = ['circle', 'square', 'triangle', 'star', 'pentagon', 'ellipse', 'hexagon'];
     this.colors = ['red', 'orange', 'yellow', 'green', 'blue', 'indigo', 'violet'];
 
+    // Draws a gradient circle
     this.drawGradient = function(x, y, size, innerColor, outerColor) {
         let dContext = drawingContext;
         let radius = size / 2;
         let gradient = dContext.createRadialGradient(x, y, radius * 0.1, x, y, radius);
         gradient.addColorStop(0, innerColor);
         gradient.addColorStop(1, outerColor);
-    
+
         dContext.fillStyle = gradient;
         ellipse(x, y, size, size);
-        dContext.fillStyle = 'white'; // Reset to default to avoid affecting other drawings
+        dContext.fillStyle = 'white'; // Reset to avoid affecting other drawings
     };
 
+    // Main drawing function, handles shape selection and drawing
     this.draw = function() {
         if (mouseIsPressed) {
-            let color = random(this.colors); // Select a random color
-            let shape = random(this.shapes); // Select a random shape
-            let size = random(15, 25); // Random size for more variety
-    
+            let color = random(this.colors); // Randomly select a color
+            let shape = random(this.shapes); // Randomly select a shape
+            let size = random(15, 25); // Random size for variety
+
+            // Draw selected shape at mouse position
             switch (shape) {
                 case 'circle':
                     this.drawGradient(mouseX, mouseY, size, color, 'white');
@@ -62,8 +65,9 @@ function rainbowStamp() {
         }
     };
 
+    // Helper functions to draw various shapes
     this.drawTriangle = function(x, y, size) {
-        const height = size * (Math.sqrt(3)/2);
+        const height = size * (Math.sqrt(3) / 2);
         triangle(x, y - height / 2, x - size / 2, y + height / 2, x + size / 2, y + height / 2);
     };
 
@@ -71,11 +75,11 @@ function rainbowStamp() {
         const angle = TWO_PI / 5;
         beginShape();
         for (let i = 0; i < TWO_PI; i += angle) {
-            let x0 = x + cos(i) * size/2;
-            let y0 = y + sin(i) * size/2;
+            let x0 = x + cos(i) * size / 2;
+            let y0 = y + sin(i) * size / 2;
             vertex(x0, y0);
-            x0 = x + cos(i + angle/2) * size/4;
-            y0 = y + sin(i + angle/2) * size/4;
+            x0 = x + cos(i + angle / 2) * size / 4;
+            y0 = y + sin(i + angle / 2) * size / 4;
             vertex(x0, y0);
         }
         endShape(CLOSE);
@@ -103,17 +107,14 @@ function rainbowStamp() {
         endShape(CLOSE);
     };
 
+    // Populate tool options in the UI
     this.populateOptions = function() {
         let optionsArea = select('.options');
-        optionsArea.html('<label for="stampInfo">Rainbow Stamp: Click on the canvas to stamp random shapes with random colors!</label>');
+        optionsArea.html('<label for="stampInfo">Rainbow Stamp:Click on the canvas to stamp random shapes with random colors!</label>');
     };
 
+    // Clears the tool options when the tool is unselected
     this.unselectTool = function() {
-        select('.options').html(''); // Clear options when tool is unselected
+        select('.options').html(''); // Clear options area
     };
 }
-
-
-
-
-

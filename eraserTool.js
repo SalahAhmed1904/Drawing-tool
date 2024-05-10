@@ -1,15 +1,25 @@
+// Defines the eraser tool functionality in a drawing application.
 function eraserTool() {
+    // Icon and name for the eraser tool in UI.
     this.icon = 'assets/eraser.jpg';
     this.name = 'eraserTool';
+
+    // Eraser size settings.
     this.defaultStrokeWeight = 5;
     this.strokeWeight = this.defaultStrokeWeight;
-    this.shape = 'circle'; // Default eraser shape
 
+    // Default eraser shape.
+    this.shape = 'circle';
+
+    // Draws the eraser shape based on current settings and mouse position.
     this.draw = function() {
         if (mouseIsPressed) {
+            // Set up drawing settings for eraser (white color to "erase").
             stroke(255);
             fill(255);
             strokeWeight(1);
+
+            // Draw the selected eraser shape at the mouse position.
             switch (this.shape) {
                 case 'circle':
                     ellipse(mouseX, mouseY, this.strokeWeight, this.strokeWeight);
@@ -31,11 +41,13 @@ function eraserTool() {
         }
     };
 
+    // Draws a triangle with given center coordinates and size.
     this.drawTriangle = function(x, y, size) {
         const height = size * (Math.sqrt(3)/2);
         triangle(x, y - height / 2, x - size / 2, y + height / 2, x + size / 2, y + height / 2);
     };
 
+    // Draws a star with given center coordinates and size.
     this.drawStar = function(x, y, size) {
         const angle = TWO_PI / 5;
         beginShape();
@@ -50,6 +62,7 @@ function eraserTool() {
         endShape(CLOSE);
     };
 
+    // Draws a pentagon with given center coordinates and size.
     this.drawPentagon = function(x, y, size) {
         const angle = TWO_PI / 5;
         beginShape();
@@ -61,6 +74,7 @@ function eraserTool() {
         endShape(CLOSE);
     };
 
+    // Populates tool options UI with controls for adjusting eraser size and shape.
     this.populateOptions = function() {
         let optionsArea = select('.options');
         optionsArea.html(`
@@ -83,6 +97,7 @@ function eraserTool() {
         });
     };
 
+    // Cleans up UI and resets settings when tool is deselected.
     this.unselectTool = function() {
         select('.options').html('');
         stroke(0);

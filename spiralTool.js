@@ -1,12 +1,16 @@
-
-
 function spiralTool() {
-    this.icon = 'assets/spiral.jpg'; // Placeholder, replace with actual path
+    // Tool icon and name
+    this.icon = 'assets/spiral.jpg'; // Replace with actual path if necessary
     this.name = 'spiralTool';
+
+    // Shape and color options for the spiral
     this.shapes = ['circle', 'square', 'triangle', 'star', 'pentagon', 'ellipse', 'hexagon'];
     this.colors = ['red', 'orange', 'yellow', 'green', 'blue', 'indigo', 'violet'];
-    this.density = 10; // Default density
+    
+    // Default spiral density
+    this.density = 10;
 
+    // Draws a gradient-filled circle
     this.drawGradient = function(x, y, size, innerColor, outerColor) {
         let dContext = drawingContext;
         let radius = size / 2;
@@ -16,29 +20,27 @@ function spiralTool() {
     
         dContext.fillStyle = gradient;
         ellipse(x, y, size, size);
-        dContext.fillStyle = 'white'; // Reset to default to avoid affecting other drawings
+        dContext.fillStyle = 'white'; // Reset to avoid affecting subsequent drawings
     };
     
+    // Draws the spiral pattern
     this.draw = function() {
         let numArms = 3; // Number of spiral arms
-        let framesPerSpiral = 10; // Draw a spiral every 60 frames
+        let framesPerSpiral = 10; // Frequency of spiral drawing
     
-        // Check if the mouse is pressed and the cursor is within the canvas bounds
         if (mouseIsPressed && mouseX > 0 && mouseX < width && mouseY > 0 && mouseY < height) {
-            // Only draw when the frameCount is divisible by framesPerSpiral
             if (frameCount % framesPerSpiral === 0) {
                 for (let arm = 0; arm < numArms; arm++) {
-                    let armAngle = arm * (TWO_PI / numArms); // Starting angle for each arm
+                    let armAngle = arm * (TWO_PI / numArms);
     
                     for (let i = 0; i < this.density; i++) {
-                        let angle = i * (TWO_PI / this.density) + armAngle; // Adjust angle for spiral spread
-                        let radius = i * (10 * this.density / 10); // Adjust the spiral's spread based on density
+                        let angle = i * (TWO_PI / this.density) + armAngle;
+                        let radius = i * (10 * this.density / 10);
                         let x = mouseX + radius * cos(angle);
                         let y = mouseY + radius * sin(angle);
-    
-                        let color = random(this.colors); // Select a random color
-                        let shape = random(this.shapes); // Select a random shape
-                        let size = random(5, 15); // Random size for more variety
+                        let color = random(this.colors);
+                        let shape = random(this.shapes);
+                        let size = random(5, 15);
     
                         fill(color);
                         stroke(color);
@@ -49,6 +51,7 @@ function spiralTool() {
         }
     };
 
+    // Draws a specific shape at a given position and size
     this.drawShape = function(shape, x, y, size, color) {
         switch (shape) {
             case 'circle':
@@ -68,7 +71,7 @@ function spiralTool() {
                 this.drawPentagon(x, y, size);
                 break;
             case 'ellipse':
-                ellipse(x, y, size * random(0.6, 1.4), size * random(0.6, 1.4));
+                ellipse(x, y, size * random(0.6, 1.4), size);
                 break;
             case 'hexagon':
                 this.drawHexagon(x, y, size);
@@ -76,15 +79,13 @@ function spiralTool() {
         }
     };
 
-
-
-
-    // Sample functions for drawing different shapes
+    // Draws a triangle
     this.drawTriangle = function(x, y, size) {
         const height = size * (Math.sqrt(3)/2);
         triangle(x, y - height / 2, x - size / 2, y + height / 2, x + size / 2, y + height / 2);
     };
 
+    // Draws a star
     this.drawStar = function(x, y, size) {
         const angle = TWO_PI / 5;
         beginShape();
@@ -99,17 +100,19 @@ function spiralTool() {
         endShape(CLOSE);
     };
 
+    // Draws a pentagon
     this.drawPentagon = function(x, y, size) {
         const angle = TWO_PI / 5;
         beginShape();
         for (let i = 0; i < TWO_PI; i += angle) {
             const x0 = x + cos(i) * size / 2;
-            const y0 = y + sin(i) * size / 2;
+            const y0 = y + sin(i) *size / 2;
             vertex(x0, y0);
         }
         endShape(CLOSE);
     };
 
+    // Draws a hexagon
     this.drawHexagon = function(x, y, size) {
         const angle = TWO_PI / 6;
         beginShape();
@@ -121,18 +124,17 @@ function spiralTool() {
         endShape(CLOSE);
     };
 
-
+    // Adds a slider to adjust the spiral density
     this.populateOptions = function() {
         let optionsArea = select('.options');
-        optionsArea.html('<label for="spiralDensity">Spiral Density:</label>');  // Use .html() to set inner HTML
-        let slider = createSlider(5, 20, this.density);  // Use createSlider for creating slider
-        slider.parent(optionsArea);  // Append slider to options area
-        slider.input(() => {
-            this.density = slider.value();
-        });
+        optionsArea.html('<label for="spiralDensity">Spiral Density:</label>');
+        let slider = createSlider(5, 20, this.density);
+        slider.parent(optionsArea);
+        slider.input(() => this.density = slider.value());
     };
 
+    // Clears the options when the tool is unselected
     this.unselectTool = function() {
-        select('.options').html(''); // Clear options when tool is unselected
+        select('.options').html('');
     };
 }

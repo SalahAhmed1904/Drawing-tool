@@ -1,11 +1,14 @@
 function shapeTool() {
-    this.icon = 'assets/shape.jpg';  // Path to the icon image for the shape tool
+    // Path to the icon image for the shape tool
+    this.icon = 'assets/shape.jpg';
     this.name = 'shapeTool';
 
+    // Initial mouse coordinates and drawing state
     this.mouseStartX = 0;
     this.mouseStartY = 0;
     this.drawing = false;
-    
+
+    // Handles the drawing of shapes
     this.draw = function() {
         if (mouseIsPressed && !this.drawing) {
             // Start drawing
@@ -42,6 +45,7 @@ function shapeTool() {
         }
     };
 
+    // Populates the options area with shape selection tools
     this.populateOptions = function() {
         let optionsArea = select('.options');
         optionsArea.html(`
@@ -58,9 +62,11 @@ function shapeTool() {
         });
     };
 
+    // Clears the options when the tool is unselected
     this.unselectTool = function() {
         select('.options').html('');
     };
 
-    this.shape = 'ellipse';  // Default shape
+    // Default shape set to ellipse
+    this.shape = 'ellipse';
 }
